@@ -19,16 +19,16 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     var id = 'ID' + Math.floor(Math.random() * 1000000); // Gerar um ID aleatório
     
     var data = {
+        id: id,
         nome: nome,
         dataNascimento: dataNascimento,
         telefone: telefone,
         pertenceIgreja: pertenceIgreja,
-        igreja: igreja,
-        id: id
+        igreja: igreja
     };
     
     // URL do script do Google Apps
-    var scriptURL = 'https://script.google.com/macros/s/AKfycbygV8HR08cZiVolxt0En6DE7CG9clK_BS7mKgrHRkXfdJ9aRrBa-88bfCkAF2rqmXSW/exec'; // substitua pelo URL gerado
+    var scriptURL = 'https://script.google.com/macros/s/AKfycbygV8HR08cZiVolxt0En6DE7CG9clK_BS7mKgrHRkXfdJ9aRrBa-88bfCkAF2rqmXSW/exec';
 
     fetch(scriptURL, {
         method: 'POST',
