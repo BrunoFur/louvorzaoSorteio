@@ -22,6 +22,11 @@ $(document).ready(function(){
         return /\(\d{2}\) \d{5}-\d{4}/.test(telefone);
     }
 
+    // Função para validar nome e sobrenome (apenas letras e espaços)
+    function validateName(value) {
+        return /^[A-Za-z\s]+$/.test(value);
+    }
+
     // Verificar se o telefone já está cadastrado
     function telefoneJaCadastrado(telefone, callback) {
         database.ref('registros').orderByChild('telefone').equalTo(telefone).once('value', function(snapshot) {
@@ -49,6 +54,26 @@ $(document).ready(function(){
         } else {
             $('#telefone').removeClass('is-invalid');
             $('.invalid-feedback').text('Por favor, insira um número de telefone válido.');
+        }
+
+        // Validar nome
+        if (!validateName(nome)) {
+            $('#nome').addClass('is-invalid');
+            $('.invalid-feedback').text('Por favor, insira apenas letras e espaços.');
+            return;
+        } else {
+            $('#nome').removeClass('is-invalid');
+            $('.invalid-feedback').text('Por favor, insira apenas letras e espaços.');
+        }
+
+        // Validar sobrenome
+        if (!validateName(sobrenome)) {
+            $('#sobrenome').addClass('is-invalid');
+            $('.invalid-feedback').text('Por favor, insira apenas letras e espaços.');
+            return;
+        } else {
+            $('#sobrenome').removeClass('is-invalid');
+            $('.invalid-feedback').text('Por favor, insira apenas letras e espaços.');
         }
 
         // Verificar se o telefone já está cadastrado
@@ -103,14 +128,9 @@ $(document).ready(function(){
         $('#registrationForm').hide();
         $('#resultado').show();
         $('#userName').text(nome);
-        $('#mensagem').html(`Seu registro foi enviado com sucesso, ${nome}! <br> Seu número para o sorteio é: <span class="id-destaque" id="idDestaque">${id}</span><br><br><button class="btn btn-primary" id="downloadButton">Download</button>`);
+        $('#mensagem').html(`Seu registro foi enviado com sucesso, ${nome}! <br> Seu número para o sorteio é: <span class="id-destaque" id="idDestaque">${id}</span><br>`);
         animateId(id);
         $('#printInstruction').show();
-
-        // Adicionar evento de clique ao botão de download
-        $('#downloadButton').on('click', function() {
-            downloadFormImage();
-        });
     }
 
     // Limpar o formulário após o envio

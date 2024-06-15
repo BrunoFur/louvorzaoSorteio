@@ -14,11 +14,13 @@
         <form id="registrationForm" class="mt-4">
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" name="nome" required>
+                <input type="text" class="form-control" id="nome" name="nome" pattern="[A-Za-zÀ-ú\s]+" title="Apenas letras e espaços são permitidos" required>
+                <div class="invalid-feedback">Por favor, insira apenas letras e espaços.</div>
             </div>
             <div class="form-group">
                 <label for="sobrenome">Sobrenome:</label>
-                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
+                <input type="text" class="form-control" id="sobrenome" name="sobrenome" pattern="[A-Za-zÀ-ú\s]+" title="Apenas letras e espaços são permitidos" required>
+                <div class="invalid-feedback">Por favor, insira apenas letras e espaços.</div>
             </div>
             <div class="form-group">
                 <label for="dataNascimento">Data de Nascimento:</label>
@@ -49,10 +51,7 @@
             <h4 class="alert-heading" id="userName"></h4>
             <p id="mensagem"></p>
             <p class="id-destaque" id="idDestaque"></p>
-            <button class="btn btn-success" id="downloadButton" style="display: none;">
-                <i class="fas fa-download"></i> Download
-            </button>
-            <p class="print-instruction" id="printInstruction" style="display: none;">Pode tirar um print desta tela se preferir.</p>
+            <p class="print-instruction" id="printInstruction" style="display: none; font: bold;">Pode tirar um print desta tela se preferir.</p>
         </div>
     </div>
     
