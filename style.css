@@ -13,16 +13,97 @@ body {
 }
 
 h1 {
-    color: #007bff; /* Azul de destaque do Bootstrap */
-    text-align: center; /* Centraliza o título */
+    color: #007bff;
+    text-align: center;
 }
 
 #resultado {
     text-align: center;
-    margin-top: 20px; /* Espaçamento superior para separar do formulário */
+    margin-top: 20px;
+    display: none;
 }
 
 .alert-heading {
     font-size: 1.5rem;
-    margin-bottom: 10px; /* Espaço inferior para separar do parágrafo */
+    margin-bottom: 10px;
+}
+
+.id-destaque {
+    font-size: 5rem; /* Tamanho grande para o ID */
+    font-weight: bold;
+    color: #28a745;
+    margin-top: 20px; /* Espaçamento adicional */
+}
+
+.id-destaque-animation {
+    animation: zoomIn 0.5s ease-in-out;
+}
+
+.print-instruction {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s;
+}
+
+.btn-primary:active::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    display: none;
+    color: #dc3545;
+    font-size: 0.875rem; /* Tamanho de fonte menor */
+    margin-top: 4px; /* Espaçamento superior menor */
+}
+
+/* Exibir mensagem de erro para telefone inválido */
+.is-invalid + .invalid-feedback {
+    display: block;
+}
+
+.telefone-feedback {
+    display: none;
+    color: #dc3545;
+    font-size: 0.875rem; /* Tamanho de fonte menor */
+    margin-top: 4px; /* Espaçamento superior menor */
+}
+
+/* Exibir mensagem de telefone já cadastrado */
+.is-invalid + .telefone-feedback {
+    display: block;
+}
+
+.id-destaque-animation {
+    animation: idHighlight 0.5s alternate infinite;
+}
+
+@keyframes idHighlight {
+    from {
+        transform: scale(1.0);
+    }
+    to {
+        transform: scale(1.1);
+    }
 }

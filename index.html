@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro para Sorteio</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Registro para Sorteio</h1>
-        <form id="registrationForm" class="mt-4" name="louvorzao">
+        <h1>Registro para Sorteio</h1>
+        <form id="registrationForm" class="mt-4">
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
             </div>
             <div class="form-group">
                 <label for="dataNascimento">Data de Nascimento:</label>
@@ -22,6 +27,8 @@
             <div class="form-group">
                 <label for="telefone">Número de Telefone:</label>
                 <input type="tel" class="form-control" id="telefone" name="telefone" required>
+                <div class="invalid-feedback">Por favor, insira um número de telefone válido.</div>
+                <div class="telefone-feedback">Este número de telefone já está cadastrado. Por favor, utilize outro número.</div>
             </div>
             <div class="form-group">
                 <label for="pertenceIgreja">Pertence a alguma igreja?</label>
@@ -34,65 +41,29 @@
                 <label for="igreja">Qual igreja?</label>
                 <input type="text" class="form-control" id="igreja" name="igreja">
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-paper-plane"></i> Registrar
+            </button>
         </form>
         <div id="resultado" class="alert alert-success mt-4" style="display: none;">
-            <h4 class="alert-heading">Registro Completo!</h4>
+            <h4 class="alert-heading" id="userName"></h4>
             <p id="mensagem"></p>
+            <p class="id-destaque" id="idDestaque"></p>
+            <button class="btn btn-success" id="downloadButton" style="display: none;">
+                <i class="fas fa-download"></i> Download
+            </button>
+            <p class="print-instruction" id="printInstruction" style="display: none;">Pode tirar um print desta tela se preferir.</p>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            var nome = document.getElementById('nome').value;
-            var dataNascimento = document.getElementById('dataNascimento').value;
-            var telefone = document.getElementById('telefone').value;
-            var pertenceIgreja = document.getElementById('pertenceIgreja').value;
-            var igreja = document.getElementById('igreja').value;
-            
-            var formData = {
-                'Nome': nome,
-                'Data de Nascimento': dataNascimento,
-                'Número de Telefone': telefone,
-                'Pertence a alguma igreja?': pertenceIgreja,
-                'Qual igreja?': igreja
-            };
-
-            fetch('https://script.google.com/macros/s/AKfycbyJcScf7O6s6efLl6FcRBqPSd1YmJW1M0rX4OzxxrU/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(function(response) {
-                document.getElementById('registrationForm').style.display = 'none';
-                document.getElementById('resultado').style.display = 'block';
-                document.getElementById('mensagem').textContent = 'Seu registro foi enviado com sucesso!';
-            })
-            .catch(function(error) {
-                document.getElementById('registrationForm').style.display = 'none';
-                document.getElementById('resultado').style.display = 'block';
-                document.getElementById('resultado').className = 'alert alert-danger mt-4';
-                document.getElementById('mensagem').textContent = 'Ocorreu um erro ao enviar seu registro. Por favor, tente novamente mais tarde.';
-                console.error('Erro ao enviar dados:', error);
-            });
-        });
-        
-        document.getElementById('pertenceIgreja').addEventListener('change', function() {
-            if (this.value === 'sim') {
-                document.getElementById('igrejaDiv').style.display = 'block';
-            } else {
-                document.getElementById('igrejaDiv').style.display = 'none';
-                document.getElementById('igreja').value = '';
-            }
-        });
-    </script>
+    
+    <!-- Firebase App (The core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
