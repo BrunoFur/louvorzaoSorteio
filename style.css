@@ -107,3 +107,12 @@ h1 {
         transform: scale(1.1);
     }
 }
+
+.banner {
+    text-align: center;
+}
+.banner img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
